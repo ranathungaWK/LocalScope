@@ -18,7 +18,20 @@ Before getting started, ensure you have the following installed:
 
 LocalScope is organized into two main workspaces: the Spring Boot backend and the Vue 3 frontend.
 
-### A. Run the Backend
+### A. Clone & Switch to `dev` Branch
+All active development and contributions take place on the **`dev`** branch. Always checkout `dev` before starting:
+
+```bash
+# Clone the repository (or your fork)
+git clone https://github.com/ranathungaWK/LocalScope.git
+cd LocalScope
+
+# Switch to the dev branch and pull the latest changes
+git checkout dev
+git pull origin dev
+```
+
+### B. Run the Backend
 ```bash
 cd backend
 mvn spring-boot:run
@@ -26,7 +39,7 @@ mvn spring-boot:run
 * The backend will start at `http://localhost:9090`.
 * An embedded SQLite database will automatically be initialized at `~/.localscope/localscope.db`.
 
-### B. Run the Frontend
+### C. Run the Frontend
 ```bash
 cd frontend
 npm install
@@ -42,9 +55,15 @@ npm run dev
    * If you're new, check out issues labeled **`good first issue`** or **`help wanted`**.
    * Leave a comment on the issue asking to work on it so others know it's being addressed and avoid duplicate work.
 
-2. **Fork & Branch:**
-   * Fork the repository and create a descriptive feature branch:
+2. **Fork, Clone & Branch from `dev`:**
+   * Fork the repository to your GitHub account.
+   * **Important:** Always base your feature branch on the latest **`dev`** branch (not `main`):
      ```bash
+     # Ensure you are on dev and have the latest commits
+     git checkout dev
+     git pull origin dev
+
+     # Create a descriptive feature or bugfix branch from dev
      git checkout -b feature/your-feature-name
      # or
      git checkout -b fix/issue-description
@@ -64,7 +83,7 @@ npm run dev
      ```
 
 5. **Open a Pull Request:**
-   * Open a PR against `main`. Reference the issue number in your PR description (e.g. `Closes #12`).
+   * Open a Pull Request targeting the **`dev`** branch (not `main`). Reference the issue number in your PR description (e.g. `Closes #12`).
    * Include a brief summary of your changes and any relevant testing steps.
 
 ---
