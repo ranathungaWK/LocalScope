@@ -33,6 +33,25 @@ export const api = {
     if (!res.ok) throw new Error('Failed to delete project');
   },
 
+  // Discover local projects in workspace (e.g. C:/KR/work/)
+  async getDetectedProjects(): Promise<{ name: string; path: string }[]> {
+    try {
+      const res = await fetch('/api/v1/system/detected-projects');
+      if (res.ok) return await res.json();
+    } catch {
+      // fallback if offline
+    }
+    return [];
+  },
+
+  // Browse local folder structure
+  async browseDirectory(path?: string): Promise<{ currentPath: string; parentPath: string | null; directories: { name: string; path: string }[] }> {
+    const query = path ? `?path=${encodeURIComponent(path)}` : '';
+    const res = await fetch(`/api/v1/system/browse${query}`);
+    if (!res.ok) throw new Error('Failed to browse directory');
+    return res.json();
+  },
+
   // Live Monitored Services from Spring Boot API
   async getServices(): Promise<MonitoredService[]> {
     try {
