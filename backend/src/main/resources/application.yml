@@ -1,0 +1,44 @@
+# ===================================================================
+# LocalScope Backend Configuration (application.yml)
+# ===================================================================
+
+# 1. Server Configuration
+# We use port 9090 because port 8080 is very commonly 
+
+server:
+  port: 9090
+
+# 2. Application Identity
+spring:
+  application:
+    name: localscope-backend
+
+  # 3. Database (SQLite via JDBC)
+  # - jdbc:sqlite: tells the driver to use SQLite.
+  # - ${user.home}/.localscope/localscope.db stores the database in the user's home folder.
+  #   This keeps it completely local and persistent between runs.
+  datasource:
+    url: jdbc:sqlite:${user.home}/.localscope/localscope.db
+    driver-class-name: org.sqlite.JDBC
+
+  # 4. JPA & Hibernate Configuration ()
+  # - database-platform: tells Hibernate to use SQLite syntax rules.
+  # - ddl-auto: 'update' tells Hibernate to automatically create or update tables
+  #   whenever we create or change Java @Entity classes.
+  jpa:
+    database-platform: org.hibernate.community.dialect.SQLiteDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    open-in-view: false
+
+# 5. Spring Boot Actuator (Health & Metrics)
+# Exposes basic health check at: http://localhost:9090/actuator/health
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always

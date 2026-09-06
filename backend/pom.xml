@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!--
+      1. Parent POM:
+      Spring Boot provides a 'starter-parent' that manages versions for all common dependencies
+      and sets up default compiler plugins for Java 21.
+    -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.3.3</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>com.localscope</groupId>
+    <artifactId>localscope-backend</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>LocalScope Backend</name>
+    <description>Core intelligence engine and REST/WebSocket API for LocalScope</description>
+
+    <properties>
+        <java.version>21</java.version>
+        <sqlite.version>3.46.0.0</sqlite.version>
+        <hibernate-community-dialects.version>6.5.2.Final</hibernate-community-dialects.version>
+    </properties>
+
+    <dependencies>
+        <!--
+          2. Web Starter:
+          Includes embedded Apache Tomcat server, Spring MVC for @RestController,
+          and Jackson for automatic JSON serialization/deserialization.
+        -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!--
+          3. WebSocket Starter:
+          Provides STOMP messaging and WebSocket protocols to push live events
+          (like Redis crashing) directly to the Vue frontend in real time.
+        -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+        </dependency>
+
+        <!--
+          4. Spring Data JPA:
+          Object-Relational Mapping (ORM) framework powered by Hibernate.
+          Allows us to create Java interfaces (Repositories) to query the database
+          without writing manual SQL queries.
+        -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <!--
+          5. SQLite JDBC Driver:
+          Allows Java to connect to a local SQLite file database.
+        -->
+        <dependency>
+            <groupId>org.xerial</groupId>
+            <artifactId>sqlite-jdbc</artifactId>
+            <version>${sqlite.version}</version>
+        </dependency>
+
+        <!--
+          6. Hibernate SQLite Dialect:
+          Teaches Hibernate how to translate generic JPA queries into SQLite-compatible SQL syntax.
+        -->
+        <dependency>
+            <groupId>org.hibernate.orm</groupId>
+            <artifactId>hibernate-community-dialects</artifactId>
+            <version>${hibernate-community-dialects.version}</version>
+        </dependency>
+
+        <!--
+          7. Validation Starter:
+          Jakarta Bean Validation (@NotNull, @NotBlank, @Min) to validate API request DTOs.
+        -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+
+        <!--
+          8. Actuator:
+          Built-in production endpoints like health status (/actuator/health) and metrics.
+        -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+        <!--
+          9. Testing Starter:
+          Includes JUnit 5, AssertJ, and Mockito for unit and integration testing.
+        -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!--
+              10. Spring Boot Maven Plugin:
+              Packages the entire application (including all dependencies and embedded Tomcat)
+              into a single executable .jar file that runs with 'java -jar app.jar'.
+            -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>

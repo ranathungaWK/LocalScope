@@ -1,0 +1,33 @@
+# Compiled class & package files
+**/target/
+*.class
+*.jar
+*.war
+
+# Node & Frontend
+**/node_modules/
+**/dist/
+.npm
+.eslintcache
+
+# Database
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+
+# IDE & Editor files
+.idea/
+*.iml
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS & Temp files
+.DS_Store
+Thumbs.db
+*.log
+scratch/
