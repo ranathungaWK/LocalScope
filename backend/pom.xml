@@ -99,7 +99,19 @@
         </dependency>
 
         <!--
-          9. Testing Starter:
+          9. Spring Boot DevTools:
+          Provides fast automatic application restart whenever classes or resources are updated,
+          making backend development fast and responsive.
+        -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+            <optional>true</optional>
+        </dependency>
+
+        <!--
+          10. Testing Starter:
           Includes JUnit 5, AssertJ, and Mockito for unit and integration testing.
         -->
         <dependency>
@@ -112,7 +124,7 @@
     <build>
         <plugins>
             <!--
-              10. Spring Boot Maven Plugin:
+              11. Spring Boot Maven Plugin:
               Packages the entire application (including all dependencies and embedded Tomcat)
               into a single executable .jar file that runs with 'java -jar app.jar'.
             -->
